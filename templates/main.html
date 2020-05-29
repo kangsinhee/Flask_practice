@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../static/style.css?2" type="text/css" charset="utf-8"/>
+    <title>Flask Main</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <h3> Flask SQLAlchemy </h3>
+            <ul>
+                {%if id %}
+                    {{ id }}
+                    <li><a href="/logout" style="color: black"> LOGOUT </a></li>
+                {% else %}
+                    <a> <li><a href="/login" style="color: black"> LOGIN </a></li> </a>
+                    <li><a href="/register" style="color: black"> REGISTER </a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+    <main role="main">
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>
