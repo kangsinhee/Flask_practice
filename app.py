@@ -6,49 +6,33 @@ from forms import RegisterForm, LoginForm
 
 app = Flask(__name__)
 
+@app.route('/register', methods=['GET, POST'])
+def register():
+    if request.method == 'GET':
+        return render_template('register.html')
+    else:
+        userid = request.form.get('userid')
+        username = request.form.get('username')
+        password = request.form.get('password')
+        email = request.form.get('email')
+        if not (userid and username and password and email):
+            return "모든 항목을 입력해주세요"
+        else:
+            user = cuser()
+            user.password = password
+            user.userid = userid
+            user.username = username
+            user.email = email
+            db.session.add(user)
+            db.session.commit()
+            print('New user: %s' %user.userid)
+            print('Password: %s\n' %password)
+    return redirect(url_for('home'))
+
 @app.route('/')
 def home():
-    Userid = session.get('userid', None)
-    return render_template("main.html", id = Userid)
-@app.route('/register', methods=['GET', 'POST'])
-def register():
-    form = RegisterForm()
-    if form.validate_on_submit(): #유효성검사
-        newuser = cuser()
-        newuser.userid = form.data.get('userid')
-        newuser.username = form.data.get('username')
-        newuser.password = form.data.get('password')
-        newuser.email = form.data.get('email')
-        newuser.check = form.data.get('gender')
-
-        print('New user: %s' %newuser.userid)
-        print('Password: %s\n' %newuser.password)
-        db.session.add(newuser)
-        db.session.commit()
-
-        return redirect(url_for('home'))
-    # if request.method == 'GET':
-    #     return render_template('register2.html')
-    # else:
-    #     userid = request.form.get('userid')
-    #     username = request.form.get('username')
-    #     password = request.form.get('password')
-    #     email = request.form.get('email')
-    #     check = request.form.get('gender')
-    #     if not (userid and username and password and email and check):
-    #         return "모든 항목을 입력해주세요"
-    #     else:
-    #         user = cuser()
-    #         user.password = password
-    #         user.userid = userid
-    #         user.username = username
-    #         user.email = email
-    #         user.check = check
-    #         db.session.add(user)
-    #         db.session.commit()
-    #         print('New user: %s' %user.userid)
-    #         print('Password: %s\n' %password)
-    # return redirect(url_for('home'))
+    Username = session.get('username', None)
+    return render_template("main.html", username = Username)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -84,4 +68,4 @@ if __name__ == "__main__":
     db.app = app
     db.create_all()
 
-    app.run(debug=True, host='127.0.0.2', port='5000')
+    app.run(debug=True, host='10.156.146.101', port='5000')
