@@ -10,8 +10,8 @@ app = Flask(__name__)
 @app.route('/')
 def home():
     Username = session.get('username', None)
-    UseriD = session.get('userID', None)
-    return render_template("main.html", name = Username, id = UseriD)
+    Userid = session.get('userid', None)
+    return render_template("main.html", name = Username, id = Userid)
 
 @app.route('/register', methods=['GET','POST'])
 def register():  # get 요청 단순히 페이지 표시 post요청 회원가입-등록을 눌렀을때 정보 가져오는것
@@ -44,6 +44,11 @@ def login():
 def logout():
     session.pop('userid',None)
     return redirect(url_for('home'))
+
+@app.route('/find_password')
+def find():
+    return '안녕'
+
 if __name__ == "__main__":
     BASE_DIR = os.path.abspath(__file__)    #DB 경로를 상대 경로로 설정
     DIR = os.path.join(BASE_DIR, "DB")

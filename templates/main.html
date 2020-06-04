@@ -11,7 +11,7 @@
             <h3> Flask SQLAlchemy </h3>
             <ul>
                 {%if id %}
-                    {{ name }}
+                    <a> User: {{ id }} </a>
                     <li><a href="/logout" style="color: black"> LOGOUT </a></li>
                 {% else %}
                     <a> <li><a href="/login" style="color: black"> LOGIN </a></li> </a>

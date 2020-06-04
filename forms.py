@@ -3,6 +3,8 @@ from models import cuser
 from wtforms import StringField, PasswordField
 from wtforms.validators import DataRequired, EqualTo
 
+
+
 class RegisterForm(FlaskForm):
     userid = StringField('userid', validators=[DataRequired()])
     username = StringField('username', validators=[DataRequired()])
