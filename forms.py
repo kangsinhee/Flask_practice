@@ -6,7 +6,7 @@ from wtforms.validators import DataRequired, EqualTo
 class RegisterForm(FlaskForm):
     userid = StringField('userid', validators=[DataRequired()])
     username = StringField('username', validators=[DataRequired()])
-    password = PasswordField('password', validators=[DataRequired()]) #equalTo("필드네임")
+    password = PasswordField('password', validators=[DataRequired()])
     email = PasswordField('email', validators=[DataRequired()])
 
 class LoginForm(FlaskForm):
@@ -18,7 +18,6 @@ class LoginForm(FlaskForm):
             password = field.data
             fcuser = cuser.query.filter_by(userid=userid).first()
             if fcuser.password != password:
-                # raise ValidationError(message % d)
-                raise ValueError('Wrong password')
+                raise ValueError('<br> Wrong password <br>')
     userid = StringField('userid', validators=[DataRequired()])
     password = PasswordField('password', validators=[DataRequired(), UserPassword()])
