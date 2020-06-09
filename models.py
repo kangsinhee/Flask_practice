@@ -1,4 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
+from werkzeug.security import generate_password_hash, check_password_hash
 
 db = SQLAlchemy()
 
@@ -9,4 +10,4 @@ class cuser(db.Model):
     userid = db.Column(db.String(32), unique = True, nullable = False)
     username = db.Column(db.String(8), unique = True, nullable = False)
     email = db.Column(db.String(32), nullable = False)
-    profile_image = db.Column(db.String(100), default='default.png')
+    profile_image = db. Column(db.String(100), default='default.png')

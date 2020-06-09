@@ -6,29 +6,29 @@
 <body>
     <div class="container">
         <div class="row mt-5">
-            <h1>회원가입</h1>
+            <h3>회원가입</h3>
         </div>
         <div class="row mt-5">
             <div class="col-12">
-                <form method="POST" >   <!--엑션 삭제해야됌-->
+                <form method="POST" >
                     {{form.csrf_token}}
                     <div>
                         {{form.userid.label("아이디")}}
-                        {{form.userid(class="form-control", placeholder="아이디")}}
+                        {{form.userid(placeholder="아이디")}}
                     </div>
                     <div>
                         {{form.username.label("사용자 이름")}}
-                        {{form.username(class="form-control", placeholder="사용자 이름")}}
+                        {{form.username(placeholder="사용자 이름")}}
                     </div>
                     <div>
                         {{form.password.label("비밀번호")}}
-                        {{form.password(class="form-control", placeholder="비밀번호")}}
+                        {{form.password(placeholder="비밀번호")}}
                     </div>
                     <div>
                         {{form.email.label("E-mail")}}
-                        {{form.email(class="form-control", placeholder="email")}}
+                        {{form.email(placeholder="email")}}
                     </div>
-                    <button type="submit" class="btn btn-primary">제출</button>
+                    <button type="submit">제출</button>
                 </form>
             </div>
 

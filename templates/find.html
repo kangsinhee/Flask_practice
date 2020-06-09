@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FindPassword</title>
+</head>
+<body>
+<div>
+    <div><h3>비밀번호 찾기</h3></div>
+    <div>
+        <div>
+            <div method="POST">
+                {{form.csrf_token}}
+                <div>
+                    {{form.userid.label("아이디 찾기")}}
+                    {{form.userid(placeholder="아이디를 입력하세요")}}
+                </div>
+                <div>
+                    {{form.email.label("이메일")}}
+                    {{form.email(placeholder="이메일을 입력하세요")}}
+                </div>
+                <button type="submit"> 찾기 </button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
