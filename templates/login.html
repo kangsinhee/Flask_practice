@@ -12,6 +12,9 @@
                     <div class="form-group">
                         {{form.userid.label("아이디")}}
                         {{form.userid(class="form-control", placeholder="아이디")}}
+                        {%if form.userid.errors%}
+                        {{form.userid.errors.0}}
+                        {%endif%}
                     </div>
                     <div class="form-group">
                         {{form.password.label("비밀번호")}}

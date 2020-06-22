@@ -3,20 +3,20 @@ from flask import Flask
 from flask import render_template, request, url_for, redirect, session, Blueprint
 from models import db, cuser
 from flask_wtf.csrf import CSRFProtect
-from forms import RegisterForm, LoginForm, findpassword
+from forms import RegisterForm, LoginForm
 
 app = Flask(__name__)
 
 @app.route('/')
 def home():
     Userid = session.get('userid', None)
-    username = session.get('username')
+    username = session.get('username', None)
     return render_template("main.html", id = Userid, name = username)
 
 @app.route('/register', methods=['GET','POST'])
 def register():  # get 요청 단순히 페이지 표시 post요청 회원가입-등록을 눌렀을때 정보 가져오는것
     form = RegisterForm()
-    if form.validate_on_submit():  # POST검사의 유효성검사
+    if form.validate_on_submit():  # 입력되지 않은것들이 있는지 확인됨
         user = cuser()  # models.py에 있는 Fcuser
         user.userid = form.data.get('userid')
         user.username = form.data.get('username')
@@ -34,7 +34,7 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():  # 유효성 검사
         session['userid'] = form.data.get('userid')  #session에 form에서 받아온 id 값 저장
-        userid = session.get('userid', None) #userid에 session의 userid 값 저장
+        userid = session.get('userid', None)         #userid에 session의 userid 값 저장
         print("Login")
         print("User ID: %s " %userid)
 
@@ -47,13 +47,6 @@ def logout():
     print("Logout: %s" %user)
     session.pop('userid',None)
     return redirect(url_for('home'))
-
-@app.route('/find')
-def find():
-    form = findpassword()
-    if form.validate_on_submit():
-        return 0
-    return render_template('find.html', form=form)
 
 if __name__ == "__main__":
     BASE_DIR = os.path.abspath(__file__)    #DB 경로를 상대 경로로 설정
